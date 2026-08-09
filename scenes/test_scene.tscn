@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b3uceknlq7uwt"]
+
+[ext_resource type="Script" uid="uid://b44bnk1sny6qb" path="res://patterns/flower.gd" id="1_uhqqe"]
+
+[node name="testScene" type="Node2D" unique_id=984755897]
+script = ExtResource("1_uhqqe")

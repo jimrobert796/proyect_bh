@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://uhdskc8p4yho"]
+
+[ext_resource type="Script" uid="uid://boluycdwqks83" path="res://patterns/spiralRight.gd" id="1_8sbe5"]
+
+[node name="spiral_right" type="Node" unique_id=586921051]
+script = ExtResource("1_8sbe5")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cc3ysmdekogwm"]
+
+[ext_resource type="Script" uid="uid://5p4f221m3w6q" path="res://patterns/bossPhase1.gd" id="1_tu6hy"]
+
+[node name="PatternBossPhase1" type="Node" unique_id=1828182489]
+script = ExtResource("1_tu6hy")

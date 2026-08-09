@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c2tjce3y0m1ll"]
+
+[ext_resource type="Script" uid="uid://dvpsb800na2ss" path="res://patterns/spiralLeft.gd" id="1_ci2i5"]
+
+[node name="PatternSpiral" type="Node" unique_id=2108303154]
+script = ExtResource("1_ci2i5")

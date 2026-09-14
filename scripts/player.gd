@@ -5,6 +5,7 @@ extends Area2D
 @export var velocidad_focus: float = 120.0  # velocidad lenta al mantener Shift (modo preciso)
 @export var cooldown_normal: float = 0.08
 @export var cooldown_w: float = 0.28  # dispara más lento con W (ui_up) presionado
+@export var margen_borde: float = 16.0  # espacio antes del borde real, para que la nave no se "pegue" justo al filo
 
 var bulletScene = preload("res://scenes/bullet.tscn")
 var vidas = 3
@@ -15,13 +16,11 @@ var w = false
 func _ready():
 	print("Estamos listos")
 	add_to_group("player")  # <- clave para que los patrones enemigos lo encuentren
-	# Ajusta esto al tamaño real de tu ventana/viewport
 	limites_pantalla = Rect2(Vector2.ZERO, get_viewport_rect().size)
 
 func _process(delta):
 	mover(delta)
 
-# Movimiento general del jugador/personaje
 func mover(delta):
 	var direccion = Vector2.ZERO
 
@@ -34,7 +33,6 @@ func mover(delta):
 	if Input.is_action_pressed("ui_up"):
 		direccion.y -= 1
 
-	# w solo es true si se presiona arriba SIN izquierda ni derecha a la vez
 	if Input.is_action_pressed("ui_up") and not Input.is_action_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
 		w = true
 	else:
@@ -43,12 +41,16 @@ func mover(delta):
 	if Input.is_key_pressed(KEY_Z):
 		dispararBullet(delta)
 	else:
-		tempo = cooldown_normal  # listo para disparar de inmediato al volver a presionar
+		tempo = cooldown_normal
 
-	direccion = direccion.normalized()  # evita que muevas más rápido en diagonal
+	direccion = direccion.normalized()
 
 	var vel_actual = velocidad_focus if Input.is_key_pressed(KEY_SHIFT) else velocidad
-	position += direccion * vel_actual * delta
+	global_position += direccion * vel_actual * delta
+
+	# Usa global_position para que coincida con las coordenadas de limites_pantalla
+	global_position.x = clamp(global_position.x, limites_pantalla.position.x + margen_borde, limites_pantalla.end.x - margen_borde)
+	global_position.y = clamp(global_position.y, limites_pantalla.position.y + margen_borde, limites_pantalla.end.y - margen_borde)
 
 
 func dispararBullet(delta):
@@ -65,7 +67,7 @@ func dispararBullet(delta):
 
 
 func _on_area_entered(area):
-	if area.is_in_group(""): #enemy_bullets
+	if area.is_in_group("enemy_bullets"):
 		vidas -= 1
 		if vidas <= -1:
 			print("game over")

@@ -15,3 +15,5 @@ texture = ExtResource("2_t4vbm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2043455478]
 shape = SubResource("CircleShape2D_py7os")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=22017138]

@@ -51,7 +51,7 @@ func dispararBullet(delta):
 		tempo = 0
 
 func _on_area_entered(area):
-	if area.is_in_group("enemy_bullets"): # enemy_bullets
+	if area.is_in_group(""): # enemy_bullets
 		vidas -= 1
 		if vidas == -1:
 			print("game over")
